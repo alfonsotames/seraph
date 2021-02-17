@@ -13,8 +13,8 @@
 	compatible = "st,stm32l432kc-seraph";
 
 	chosen {
-		zephyr,console = &usart2;
-		zephyr,shell-uart = &usart2;
+		zephyr,console = &usart1;
+		zephyr,shell-uart = &usart1;
 		zephyr,sram = &sram0;
 		zephyr,flash = &flash0;
 		zephyr,can-primary = &can1;
@@ -40,19 +40,39 @@
 		};
 	};
 
+  pwmleds {
+		compatible = "pwm-leds";
 
+		red_pwm_led: led_pwm_0 {
+			pwms = <&pwm0 1 4 PWM_POLARITY_NORMAL>;
+		};
+
+		green_pwm_led: led_pwm_1 {
+			pwms = <&pwm1 1 4 PWM_POLARITY_NORMAL>;
+		};
+
+		blue_pwm_led: led_pwm_2 {
+			pwms = <&pwm2 1 4 PWM_POLARITY_NORMAL>;
+		};
+	};
 
 	aliases {
     led0 = &red_led;
     led1 = &green_led;
     led2 = &blue_led;
+    pwm-led0 = &red_pwm_led;
+		pwm-led1 = &green_pwm_led;
+		pwm-led2 = &blue_pwm_led;
+		red-pwm-led = &red_pwm_led;
+		green-pwm-led = &green_pwm_led;
+		blue-pwm-led = &blue_pwm_led;
 	};
 };
 
 
 
-&usart2 {
-	pinctrl-0 = <&usart2_tx_pa2 &usart2_rx_pa3>;
+&usart1 {
+	pinctrl-0 = <&usart1_tx_pb6 &usart1_rx_pb7>;
 	current-speed = <115200>;
 	status = "okay";
 };
@@ -71,34 +91,29 @@
 
 
 
-&timers2 {
+&timers1 {
 	status = "okay";
 
-	pwm2: pwm {
+	pwm0: pwm {
 		status = "okay";
-		pinctrl-0 = <&tim2_ch1_pa0>;
+		pinctrl-0 = <&tim1_ch4_pa11>;
 	};
 };
 
 &timers15 {
 	status = "okay";
-
-	pwm0: pwm {
+	pwm1: pwm {
 		status = "okay";
-		pinctrl-0 = <&tim2_ch2_pa1>;
-
+		pinctrl-0 = <&tim15_ch1_pa2>;
 	};
+};
 
-  pwm1: pwm {
-    status = "okay";
-    pinctrl-0 = <&tim15_ch1_pa2>;
-  };
-
-  pwm2: pwm {
-    status = "okay";
-    pinctrl-0 = <&tim2_ch2_pa1>;
-  };
-
+&timers16 {
+	status = "okay";
+	pwm2: pwm {
+		status = "okay";
+		pinctrl-0 = <&tim16_ch1_pa6>;
+	};
 };
 
 
