@@ -91,12 +91,11 @@
 
 
 
-&timers1 {
+&timers2 {
 	status = "okay";
-
 	pwm0: pwm {
 		status = "okay";
-		pinctrl-0 = <&tim1_ch4_pa11>;
+		pinctrl-0 = <&tim2_ch1_pa0>;
 	};
 };
 
@@ -106,6 +105,7 @@
 		status = "okay";
 		pinctrl-0 = <&tim15_ch1_pa2>;
 	};
+
 };
 
 &timers16 {
