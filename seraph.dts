@@ -35,7 +35,7 @@
 		};
 
 		blue_led: led_2 {
-			gpios = <&gpioa 6 GPIO_ACTIVE_LOW>;
+			gpios = <&gpioa 3 GPIO_ACTIVE_LOW>;
 			label = "Blue LED";
 		};
 	};
@@ -44,7 +44,7 @@
 		compatible = "pwm-leds";
 
 		red_pwm_led: led_pwm_0 {
-			pwms = <&pwm0 1 4 PWM_POLARITY_NORMAL>;
+			pwms = <&pwm0 2 4 PWM_POLARITY_NORMAL>;
 		};
 
 		green_pwm_led: led_pwm_1 {
@@ -56,6 +56,16 @@
 		};
 	};
 
+  buttons {
+		compatible = "gpio-keys";
+
+		button0: button_0 {
+			gpios = <&gpioh 3 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "Push Button 1";
+		};
+	};
+
+
 	aliases {
     led0 = &red_led;
     led1 = &green_led;
@@ -66,6 +76,7 @@
 		red-pwm-led = &red_pwm_led;
 		green-pwm-led = &green_pwm_led;
 		blue-pwm-led = &blue_pwm_led;
+    sw0 = &button0;
 	};
 };
 
@@ -95,7 +106,7 @@
 	status = "okay";
 	pwm0: pwm {
 		status = "okay";
-		pinctrl-0 = <&tim2_ch1_pa0>;
+		pinctrl-0 = <&tim2_ch2_pa1>;
 	};
 };
 
