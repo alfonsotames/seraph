@@ -1,18 +1,24 @@
 .. _nucleo_l432kc_board:
 
-ST Nucleo L432KC
+SERAPH L4 by Materiam
 ################
 
 Overview
 ********
 
-The Nucleo L432KC board features an ARM Cortex-M4 based STM32L432KC MCU
-with a wide range of connectivity support and configurations. Here are
-some highlights of the Nucleo L432KC board:
+The Seraph L4 is a breakout board for the little but mighty STM32L432KC
+ultra low power Cortex M4 MCU. With its three RGB leds and user button
+it's been especially designed for learning Zephyr.
 
-- STM32 microcontroller in UFQFPN32 package
-- Arduino Uno V3 connectivity
-- On-board ST-LINK/V2-1 debugger/programmer with SWD connector
+The STM32 built in DFU bootloader lets the user program the device without
+a programmer while saving valuable flash memory for user applications. Just
+press the user (BOOT0) while holding reset in a fast and simple finger
+movement. The green led will light indicating DFU mode and flash using Zephyr's
+West command line tool.
+
+
+- STM32L432KC MCU in UFQFPN32 package
+
 - Flexible board power supply:
 
   - USB VBUS or external source(3.3V, 5V, 7 - 12V)
