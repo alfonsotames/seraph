@@ -21,6 +21,8 @@
     //zephyr,code-partition = &slot0_partition;
 	};
 
+
+
   leds {
 		compatible = "gpio-leds";
 
@@ -108,17 +110,21 @@
 		status = "okay";
 		pinctrl-0 = <&tim2_ch2_pa1>;
 	};
-};
 
-&timers15 {
-	status = "okay";
-	pwm1: pwm {
+  pwm1: pwm {
 		status = "okay";
-		pinctrl-0 = <&tim15_ch1_pa2>;
+		pinctrl-1 = <&tim2_ch3_pa2>;
 	};
 
+  pwm2: pwm {
+    status = "okay";
+    pinctrl-2 = <&tim2_ch4_pa3>;
+  };
+
 };
 
+
+/*
 &timers16 {
 	status = "okay";
 	pwm2: pwm {
@@ -126,8 +132,14 @@
 		pinctrl-0 = <&tim16_ch1_pa6>;
 	};
 };
+*/
 
 
+
+&usb {
+	pinctrl-0 = <&usb_dm_pa11 &usb_dp_pa12>;
+	status = "okay";
+};
 
 
 &rtc {
