@@ -46,15 +46,15 @@
 		compatible = "pwm-leds";
 
 		red_pwm_led: led_pwm_0 {
-			pwms = <&pwm0 2 4 PWM_POLARITY_NORMAL>;
+			pwms = <&pwms 2 4 PWM_POLARITY_NORMAL>;
 		};
 
 		green_pwm_led: led_pwm_1 {
-			pwms = <&pwm1 1 4 PWM_POLARITY_NORMAL>;
+			pwms = <&pwms 3 4 PWM_POLARITY_NORMAL>;
 		};
 
 		blue_pwm_led: led_pwm_2 {
-			pwms = <&pwm2 1 4 PWM_POLARITY_NORMAL>;
+			pwms = <&pwms 4 4 PWM_POLARITY_NORMAL>;
 		};
 	};
 
@@ -106,20 +106,11 @@
 
 &timers2 {
 	status = "okay";
-	pwm0: pwm {
+	pwms: pwm {
 		status = "okay";
-		pinctrl-0 = <&tim2_ch2_pa1>;
+		pinctrl-0 = <&tim2_ch2_pa1 &tim2_ch3_pa2 &tim2_ch4_pa3>;
 	};
 
-  pwm1: pwm {
-		status = "okay";
-		pinctrl-1 = <&tim2_ch3_pa2>;
-	};
-
-  pwm2: pwm {
-    status = "okay";
-    pinctrl-2 = <&tim2_ch4_pa3>;
-  };
 
 };
 
