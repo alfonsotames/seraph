@@ -1,39 +1,58 @@
-.. _nucleo_l432kc_board:
+.. _SERAPH_board:
 
-SERAPH L4 by Materiam
+SERAPH L432KC by Materiam
 ################
 
 Overview
 ********
 
-The Seraph L4 is a breakout board for the little but mighty STM32L432KC
-ultra low power Cortex M4 MCU. With its three RGB leds and user button
-it's been especially designed for learning Zephyr.
+The Seraph L432KC is a breakout board for the little but mighty STM32L432KC
+ultra low power Cortex M4 MCU.
 
-The STM32 built in DFU bootloader lets the user program the device without
-a programmer while saving valuable flash memory for user applications. Just
-press the user (BOOT0) while holding reset in a fast and simple finger
-movement. The green led will light indicating DFU mode and flash using Zephyr's
-West command line tool.
+With its three bright RGB leds and user button, it's been especially designed
+for learning Zephyr and to be easily integrated into your projects.
+
+The STM32L432KC shines for its low power consumption, that's why we chose to
+power the board with an STLQ020 ultra-low quiescent current LDO power supply
+(5.5v max input). The STLQ020 is capable of modestly sourcing up to a
+reasonable 200 mA while consuming 100 μA at 200 mA load and only 300 nA at no
+load!
+
+Development boards are constantly manipulated and touched while connected to
+to computers so we provided ESD protection through the USBLC6-2SC6 from ST.
+It brings IEC 61000-4-2 level 4 protection to your computer or USB peripheral
+in case of ESD discharge. There's also reverse polarity protection and a 500 mA
+resettable fuse to protect the USB/VIN power source from overcurrents.
+
+And last but not least, We have included big, high quality and confortable
+buttons for BOOT (white) and RESET (black) functions that go easy on your
+fingers and lets you put the SERAPH board on DFU mode quickly without the need
+of jumpers or connecting-disconnecting the USB cable.
+
+The STM32 built-in DFU bootloader lets the user program the device without
+an external hardware programmer while saving valuable flash memory for user
+applications. Not a single kb is wasted on the integrated bootloader. Just press
+the user button (BOOT0) while holding RESET in a fast and simple finger movement
+and the green led will light indicating DFU mode.
 
 
 - STM32L432KC MCU in UFQFPN32 package
 
 - Flexible board power supply:
 
-  - USB VBUS or external source(3.3V, 5V, 7 - 12V)
+  - USB VBUS or external source(3.3V, 5V, up to 5.5V)
   - Power management access point
 
 - Three LEDs: USB communication (LD1), power LED (LD2), user LED (LD3)
 - One push-button: RESET
 
-.. image:: img/nucleo_l432kc.jpg
+.. image:: img/seraph.gif
   :width: 250px
   :align: center
   :height: 188px
-  :alt: Nucleo L432KC
+  :alt: SERAPH L432KC
 
-More information about the board can be found at the `Nucleo L432KC website`_.
+More information about the board can be found at the `SERAPH website`_.
 
 Hardware
 ********
