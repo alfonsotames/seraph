@@ -39,7 +39,7 @@ Not a single bit of SDRAM is wasted on the bootloader!
 - Three LEDs: USB communication (LD1), power LED (LD2), user LED (LD3)
 - One push-button: RESET
 
-.. image:: img/seraph.gif
+.. image:: img/seraph_pinout.png
   :width: 250px
   :align: center
   :height: 188px
