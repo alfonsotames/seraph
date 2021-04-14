@@ -19,16 +19,14 @@ The USB data lines are ESD protected through the USBLC6-2SC6 from ST. The Vin
 voltage input is reverse polarity protected and there is also a 500 mA
 resettable fuse to protect the USB/VIN power source from overcurrents.
 
-Last but not least, We have included big, high quality and confortable
-buttons for BOOT (white) and RESET (black) functions that go easy on your
-fingers and lets you put the SERAPH board on DFU mode quickly without the need
-of jumpers or connecting-disconnecting the USB cable.
+Last but not least, We have included big, high quality and comfortable
+buttons for user-BOOT (white) and RESET (black) functions that go easy on your
+fingers and lets the SERAPH board to be put on DFU mode quickly for programming
+without the need of jumpers or connecting-disconnecting the USB cable.
 
 The STM32 built-in DFU bootloader lets the user program the device without
-an external hardware programmer while saving valuable flash memory for user
-applications. Not a single kb is wasted on the integrated bootloader. Just press
-the user button (BOOT0) while holding RESET in a fast and simple finger movement
-and the green led will light indicating DFU mode.
+the need of an external hardware programmer while saving valuable flash memory.
+Not a single bit of SDRAM is wasted on the bootloader!
 
 
 - STM32L432KC MCU in UFQFPN32 package
@@ -118,7 +116,7 @@ More information about STM32L432KC can be found here:
 Supported Features
 ==================
 
-The Zephyr nucleo_l432kc board configuration supports the following hardware features:
+The Zephyr Seraph board configuration supports the following hardware features:
 
 +-----------+------------+-------------------------------------+
 | Interface | Controller | Driver/Component                    |
@@ -134,6 +132,8 @@ The Zephyr nucleo_l432kc board configuration supports the following hardware fea
 +-----------+------------+-------------------------------------+
 | I2C       | on-chip    | i2c                                 |
 +-----------+------------+-------------------------------------+
+| SPI       | on-chip    | spi                                 |
++-----------+------------+-------------------------------------+
 | PWM       | on-chip    | pwm                                 |
 +-----------+------------+-------------------------------------+
 | CAN       | on-chip    | can                                 |
@@ -144,18 +144,18 @@ The Zephyr nucleo_l432kc board configuration supports the following hardware fea
 Other hardware features are not yet supported on this Zephyr port.
 
 The default configuration can be found in the defconfig file:
-``boards/arm/nucleo_l432kc/nucleo_l432kc_defconfig``
+``boards/arm/seraph/seraph_defconfig``
 
 
 Connections and IOs
 ===================
 
-Nucleo L432KC Board has 6 GPIO controllers. These controllers are responsible for pin muxing,
+Seraph Board has 6 GPIO controllers. These controllers are responsible for pin muxing,
 input/output, pull-up, etc.
 
 Available pins:
 ---------------
-.. image:: img/nucleo_l432kc_arduino_nano.png
+.. image:: img/seraph.gif
    :width: 960px
    :align: center
    :height: 720px
@@ -198,6 +198,10 @@ flashed in the usual way (see :ref:`build_an_application` and
 
 Flashing
 ========
+
+Just press
+the user button (BOOT0) while holding RESET in a fast and simple finger movement
+and the green led will light indicating DFU mode.
 
 Nucleo L432KC board includes an ST-LINK/V2-1 embedded debug tool
 interface.  This interface is supported by the openocd version
