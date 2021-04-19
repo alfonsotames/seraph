@@ -9,26 +9,27 @@ Overview
 The Seraph L432KC is a breakout board for the little but mighty STM32L432KC
 ultra low power Cortex M4 MCU. With its three bright RGB leds and user/BOOT0
 button, it's been especially designed for learning Zephyr and to be easily
-integrated into your projects.
+integrated in your projects.
 
-The STM32L432KC shines for its low power consumption, so we chose to power it
+The STM32L432KC shines for its low power consumption, so we chose to power it up
 with an STLQ020 ultra-low quiescent current LDO power supply that can source up
-to 200 mA and consumes a mere 100μA at a 200mA load and only 300 nA at no load!
+to 200 mA and consumes a mere 100μA at its peak 200mA load and only 300 nA at no
+load!
 
-The USB data lines are ESD protected through the USBLC6-2SC6 from ST. The Vin
-voltage input is reverse polarity protected and there is also a 500 mA
-resettable fuse to protect the USB/VIN power source from overcurrents.
+USB ESD protection is provided through an USBLC6-2SC6 from ST. The Vin voltage
+input is reverse polarity protected and there is also a 500 mA resettable fuse
+to protect the USB/VIN power lines from overcurrents.
 
-Last but not least, We have included big, high quality and confortable
-buttons for BOOT (white) and RESET (black) functions that go easy on your
-fingers and lets you put the SERAPH board on DFU mode quickly without the need
-of jumpers or connecting-disconnecting the USB cable.
+Last but not least, we've included big, high quality and comfortable buttons for
+BOOT (white) and RESET (black) that go easy on your fingers and lets you put the
+SERAPH board on DFU mode quickly without the need of jumpers or  connecting and
+disconnecting the USB cable.
 
-The STM32 built-in DFU bootloader lets the user program the device without
-an external hardware programmer while saving valuable flash memory for user
-applications. Not a single kb is wasted on the integrated bootloader. Just press
-the user button (BOOT0) while holding RESET in a fast and simple finger movement
-and the green led will light indicating DFU mode.
+The STM32 built-in DFU bootloader lets the device be programmed without the use
+of an external hardware programmer while saving valuable flash memory for user
+applications. Not a single kb is wasted! Just press the user button (BOOT0)
+while holding RESET in a fast and simple finger movement and the green led will
+light indicating DFU mode.
 
 
 - STM32L432KC MCU in UFQFPN32 package
