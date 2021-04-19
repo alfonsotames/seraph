@@ -1,15 +1,15 @@
 .. _SERAPH_board:
 
-SERAPH L432KC by Materiam
-################
+SERAPH L4
+#########
 
 Overview
 ********
 
-The Seraph L432KC is a breakout board for the little but mighty STM32L432KC
-ultra low power Cortex M4 MCU. With its three bright RGB leds and user/BOOT0
-button, it's been especially designed for learning Zephyr and to be easily
-integrated in your projects.
+The Seraph L4 is a breakout board for the little but mighty STM32L432KC ultra
+low power Cortex M4 MCU. With its three bright RGB leds and user/BOOT0 button,
+it's been especially designed for learning Zephyr and to be easily integrated in
+your projects.
 
 The STM32L432KC shines for its low power consumption, so we chose to power it up
 with an STLQ020 ultra-low quiescent current LDO power supply that can source up
@@ -39,33 +39,35 @@ light indicating DFU mode.
   - USB VBUS or external source(3.3V, 5V, up to 5.5V)
   - Power management access point
 
-- Three LEDs: USB communication (LD1), power LED (LD2), user LED (LD3)
-- One push-button: RESET
+- Three LEDs: Red (LD0), Green (LD1), Blue (LD2)
+- RESET push button
+- USER/BOOT0 push button (User button through PH3)
+
 
 .. image:: img/seraph.gif
-  :width: 250px
+  :width: 470px
   :align: center
-  :height: 188px
+  :height: 280px
   :alt: SERAPH L432KC
 
-More information about the board can be found at the `SERAPH website`_.
+
 
 Hardware
 ********
 
-The STM32L432KC SoC provides the following hardware IPs:
+The STM32L432KC SoC provides:
 
 - Ultra-low-power with FlexPowerControl (down to 28 nA Standby mode and 84
-  |micro| A/MHz run mode)
-- Core: ARM |reg| 32-bit Cortex |reg| -M4 CPU with FPU, frequency up to 80 MHz,
+  µA/MHz run mode)
+- Core: ARM 32-bit Cortex® -M4 CPU with FPU, frequency up to 80 MHz,
   100DMIPS/1.25DMIPS/MHz (Dhrystone 2.1)
 - Clock Sources:
 
   - 32 kHz crystal oscillator for RTC (LSE)
-  - Internal 16 MHz factory-trimmed RC ( |plusminus| 1%)
-  - Internal low-power 32 kHz RC ( |plusminus| 5%)
+  - Internal 16 MHz factory-trimmed RC (±1%)
+  - Internal low-power 32 kHz RC (±5%)
   - Internal multispeed 100 kHz to 48 MHz oscillator, auto-trimmed by
-    LSE (better than |plusminus| 0.25 % accuracy)
+    LSE (better than ±0.25 % accuracy)
   - 2 PLLs for system clock, USB, audio, ADC
 
 - RTC with HW calendar, alarms and calibration
@@ -89,7 +91,7 @@ The STM32L432KC SoC provides the following hardware IPs:
 - Rich analog peripherals (independent supply)
 
   - 1x 12-bit ADC 5 MSPS, up to 16-bit with hardware oversampling, 200
-    |micro| A/MSPS
+    µA/MSPS
   - 2x 12-bit DAC, low-power sample and hold
   - 1x operational amplifiers with built-in PGA
   - 2x ultra-low-power comparators
@@ -119,7 +121,7 @@ More information about STM32L432KC can be found here:
 Supported Features
 ==================
 
-The Zephyr Seraph board configuration supports the following hardware features:
+Seraph's Zephyr board configuration supports the following hardware features:
 
 +-----------+------------+-------------------------------------+
 | Interface | Controller | Driver/Component                    |
@@ -166,73 +168,115 @@ Available pins:
 
 For mode details please refer to `STM32 Nucleo-32 board User Manual`_.
 
-Default Zephyr Peripheral Mapping:
-----------------------------------
+Default Zephyr Peripheral Mapping
+=================================
 
-- UART_1_TX : PA9
-- UART_1_RX : PA10
-- UART_2_TX : PA2
-- UART_2_RX : PA3
-- I2C_1_SCL : PB6
-- I2C_1_SDA : PB7
-- PWM_2_CH1 : PA0
-- LD3 : PB3
+Default DTS mappings for some hardware interfaces:
+
+I2C
+---
+
+.. code-block:: dts
+
+  &i2c1 {
+  	pinctrl-0 = <&i2c1_scl_pa9 &i2c1_sda_pa10>;
+  	clock-frequency = <I2C_BITRATE_FAST>;
+  	status = "okay";
+  };
+
+SPI
+---
+
+  .. code-block:: dts
+
+    &spi1 {
+    	pinctrl-0 = <&spi1_nss_pb0 &spi1_sck_pa5 &spi1_miso_pa6 &spi1_mosi_pa7>;
+    	status = "okay";
+          cs-gpios = <&gpiob 0 GPIO_ACTIVE_LOW>;
+    };
+
+
+SPI with DMA
+------------
+
+.. code-block:: dts
+
+  &spi1 {
+  	pinctrl-0 = <&spi1_nss_pb0 &spi1_sck_pa5 &spi1_miso_pa6 &spi1_mosi_pa7>;
+  	status = "okay";
+  	dmas = <&dma1 3 1 0x20440 0x00
+  	&dma1 2 1 0x20480 0x00>;
+        dma-names = "tx", "rx";
+        cs-gpios = <&gpiob 0 GPIO_ACTIVE_LOW>;
+  };
+
+  &dma1 {
+    status = "okay";
+  };
+
+
 
 System Clock
 ------------
 
-Nucleo L432KC System Clock could be driven by internal or external oscillator,
-as well as main PLL clock. By default System clock is driven by PLL clock at 80MHz,
-driven by 16MHz high speed internal oscillator.
+Driven by an external NX3215SA-32.768KHZ-EXS00A-MU00525 32.768 Khz crystal. By
+default System clock is driven by PLL clock at 80MHz.
 
 Serial Port
 -----------
 
-Nucleo L432KC board has 3 U(S)ARTs. The Zephyr console output is assigned to UART2.
+By default, the Zephyr console output is assigned to UART1 (TX: PB6 and RX: PB7).
 Default settings are 115200 8N1.
 
+.. code-block:: dts
+
+  &usart1 {
+  	pinctrl-0 = <&usart1_tx_pb6 &usart1_rx_pb7>;
+  	current-speed = <115200>;
+  	status = "okay";
+  };
 
 Programming and Debugging
 *************************
 
-Applications for the ``nucleo_l432kc`` board configuration can be built and
-flashed in the usual way (see :ref:`build_an_application` and
-:ref:`application_run` for more details).
+Applications for the Seraph can be built using west:
+
+.. code-block:: console
+
+  $ west build
 
 Flashing
 ========
 
-Just press
-the user button (BOOT0) while holding RESET in a fast and simple finger movement
-and the green led will light indicating DFU mode.
+The Seraph board can be flashed in three ways:
 
-Nucleo L432KC board includes an ST-LINK/V2-1 embedded debug tool
-interface.  This interface is supported by the openocd version
-included in the Zephyr SDK since v0.9.2.
+DFU-UTIL
+--------
 
-Flashing an application to Nucleo L432KC
-----------------------------------------
+If you don't have a hardware programmer, you can flash the Seraph board using
+just a USB cable and the embedded bootloader from ST. You will need to install
+the dfu-util application (available in most Linux distros and on Hombrew in Mac
+OS X).
 
-Connect the Nucleo L432KC to your host computer using the USB port,
-then run a serial host program to connect with your Nucleo board.
-
-.. code-block:: console
-
-   $ minicom -D /dev/ttyACM0
-
-Now build and flash an application. Here is an example for
-:ref:`hello_world`.
-
-.. zephyr-app-commands::
-   :zephyr-app: samples/hello_world
-   :board: nucleo_l432kc
-   :goals: build flash
-
-You should see the following message on the console:
+Just press the USER/BOOT0 button (white) while the holding RESET (black) button,
+then type:
 
 .. code-block:: console
 
-   $ Hello World! arm
+  $ west flash -r dfu-util
+
+For programming using ST-LINK debug tool, select the openocd runner:
+
+.. code-block:: console
+
+  $ west flash -r openocd
+
+For programming using Segger J-Link:
+
+.. code-block:: console
+
+  $ west flash -r jlink
+
 
 
 Debugging
