@@ -119,7 +119,7 @@ More information about STM32L432KC can be found here:
 Supported Features
 ==================
 
-The Zephyr nucleo_l432kc board configuration supports the following hardware features:
+The Zephyr Seraph board configuration supports the following hardware features:
 
 +-----------+------------+-------------------------------------+
 | Interface | Controller | Driver/Component                    |
@@ -135,6 +135,8 @@ The Zephyr nucleo_l432kc board configuration supports the following hardware fea
 +-----------+------------+-------------------------------------+
 | I2C       | on-chip    | i2c                                 |
 +-----------+------------+-------------------------------------+
+| SPI       | on-chip    | spi                                 |
++-----------+------------+-------------------------------------+
 | PWM       | on-chip    | pwm                                 |
 +-----------+------------+-------------------------------------+
 | CAN       | on-chip    | can                                 |
@@ -145,18 +147,18 @@ The Zephyr nucleo_l432kc board configuration supports the following hardware fea
 Other hardware features are not yet supported on this Zephyr port.
 
 The default configuration can be found in the defconfig file:
-``boards/arm/nucleo_l432kc/nucleo_l432kc_defconfig``
+``boards/arm/seraph/seraph_defconfig``
 
 
 Connections and IOs
 ===================
 
-Nucleo L432KC Board has 6 GPIO controllers. These controllers are responsible for pin muxing,
+Seraph Board has 6 GPIO controllers. These controllers are responsible for pin muxing,
 input/output, pull-up, etc.
 
 Available pins:
 ---------------
-.. image:: img/nucleo_l432kc_arduino_nano.png
+.. image:: img/seraph_pinout.png
    :width: 960px
    :align: center
    :height: 720px
@@ -199,6 +201,10 @@ flashed in the usual way (see :ref:`build_an_application` and
 
 Flashing
 ========
+
+Just press
+the user button (BOOT0) while holding RESET in a fast and simple finger movement
+and the green led will light indicating DFU mode.
 
 Nucleo L432KC board includes an ST-LINK/V2-1 embedded debug tool
 interface.  This interface is supported by the openocd version
