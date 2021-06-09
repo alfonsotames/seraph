@@ -79,6 +79,7 @@
 		green-pwm-led = &green_pwm_led;
 		blue-pwm-led = &blue_pwm_led;
     sw0 = &button0;
+    pwm-servo = &red_pwm_led;
 	};
 };
 
@@ -91,7 +92,8 @@
 };
 
 &spi1 {
-	pinctrl-0 = <&spi1_nss_pb0 &spi1_sck_pa5 &spi1_miso_pa6 &spi1_mosi_pa7>;
+	pinctrl-0 = <&spi1_nss_pb0 &spi1_sck_pa1
+		     &spi1_miso_pa6 &spi1_mosi_pa7>;
 	status = "okay";
 };
 
