@@ -1,12 +1,10 @@
-# STM32L432KC SERAPH board configuration
+# STM32L432KC Nucleo board configuration
 
-# Copyright (c) 2021 MATERIAM SAPI de CV
+# Copyright (c) 2016 Open-RnD Sp. z o.o.
+# Copyright (c) 2016 BayLibre, SAS
 # SPDX-License-Identifier: Apache-2.0
 
 if BOARD_SERAPH
-
-config BOARD
-	default "seraph"
 
 config SPI_STM32_INTERRUPT
 	default y
